@@ -10,6 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 .container {
@@ -18,8 +19,14 @@ body {
 
 header h1 {
     font-size: 3rem;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     text-shadow: 3px 3px #e67e22;
+    animation: neon-glow 1.5s infinite alternate;
+}
+
+@keyframes neon-glow {
+    from { text-shadow: 0 0 10px #e67e22, 0 0 20px #f39c12; }
+    to { text-shadow: 0 0 20px #f39c12, 0 0 40px #e67e22; }
 }
 
 .card {
@@ -71,6 +78,20 @@ button:hover {
 @keyframes spinAnimation {
     0% { transform: scale(1); }
     100% { transform: scale(1.05); }
+}
+
+.history {
+    margin-top: 20px;
+    background-color: rgba(0,0,0,0.3);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.history ul {
+    list-style: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
 }
 
 footer {

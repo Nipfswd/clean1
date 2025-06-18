@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>🎰 Virtual Casino Deluxe 🎰</title>
+    <title>🎰 Virtual Casino Ultra 🎰</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎰 Virtual Casino Deluxe 🎰</h1>
+            <h1>🎰 Virtual Casino Ultra 🎰</h1>
         </header>
 
-        <!-- Login Section -->
         <div id="login" class="card">
             <h2>Enter Your Name:</h2>
             <input type="text" id="username" placeholder="Your Name">
@@ -20,14 +19,15 @@
             <h3 id="moneyDisplay">💰 Money: $1000</h3>
         </div>
 
-        <!-- Casino Section -->
         <div id="casino" class="card hidden">
             <h2>Slot Machine</h2>
-            <div id="slots" class="slots">
-                🍒 🍋 🍉
-            </div>
+            <div id="slots" class="slots">🍒 🍋 🍉</div>
             <button id="spinBtn">Spin ($10)</button>
             <p id="result"></p>
+            <div id="spinHistory" class="history">
+                <h3>Spin History</h3>
+                <ul id="historyList"></ul>
+            </div>
         </div>
 
         <footer>
@@ -35,6 +35,13 @@
         </footer>
     </div>
 
+    <!-- Sound Effects -->
+    <audio id="winSound" src="https://www.soundjay.com/button/sounds/button-4.mp3"></audio>
+    <audio id="jackpotSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+    <audio id="spinSound" src="https://www.soundjay.com/button/sounds/button-10.mp3"></audio>
+    <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-funnysong.mp3" loop></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
