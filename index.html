@@ -2,46 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>🎰 Virtual Casino Ultra 🎰</title>
+    <title>🎰 Ultimate Casino SIM GOD MODE</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div id="app">
+
         <header>
-            <h1>🎰 Virtual Casino Ultra 🎰</h1>
+            <h1>🎰 Ultimate Casino SIM GOD MODE 🎰</h1>
+            <div id="userInfo">
+                <div id="avatar"></div>
+                <div>
+                    <h2 id="playerName"></h2>
+                    <p>💰 Money: $<span id="moneyDisplay"></span></p>
+                    <p>VIP Level: <span id="vipLevel"></span></p>
+                </div>
+            </div>
+            <button id="resetBtn">Reset Account</button>
         </header>
 
-        <div id="login" class="card">
+        <section id="loginScreen" class="card">
             <h2>Enter Your Name:</h2>
             <input type="text" id="username" placeholder="Your Name">
-            <button id="startBtn">Start Playing</button>
-            <h3 id="welcomeMessage"></h3>
-            <h3 id="moneyDisplay">💰 Money: $1000</h3>
-        </div>
+            <button id="startBtn">Start Casino Adventure</button>
+        </section>
 
-        <div id="casino" class="card hidden">
-            <h2>Slot Machine</h2>
-            <div id="slots" class="slots">🍒 🍋 🍉</div>
-            <button id="spinBtn">Spin ($10)</button>
-            <p id="result"></p>
-            <div id="spinHistory" class="history">
-                <h3>Spin History</h3>
-                <ul id="historyList"></ul>
+        <section id="mainCasino" class="hidden">
+
+            <nav>
+                <button class="gameBtn" data-game="slots">Slots 🎰</button>
+                <button class="gameBtn" data-game="blackjack">Blackjack 🃏</button>
+                <button class="gameBtn" data-game="roulette">Roulette 🎯</button>
+                <button class="gameBtn" data-game="shop">Shop 🏪</button>
+                <button class="gameBtn" data-game="profile">Profile 🧑‍🎤</button>
+            </nav>
+
+            <div id="gameContainer">
+
+                <!-- Slots -->
+                <div id="slotsGame" class="game hidden">
+                    <h2>Slot Machine</h2>
+                    <div id="slotsDisplay">🍒 🍋 🍉</div>
+                    <button id="spinBtn">Spin ($10)</button>
+                    <p id="slotsResult"></p>
+                </div>
+
+                <!-- Blackjack (placeholder) -->
+                <div id="blackjackGame" class="game hidden">
+                    <h2>Blackjack 🃏 (Coming Soon)</h2>
+                </div>
+
+                <!-- Roulette (placeholder) -->
+                <div id="rouletteGame" class="game hidden">
+                    <h2>Roulette 🎯 (Coming Soon)</h2>
+                </div>
+
+                <!-- Shop -->
+                <div id="shopGame" class="game hidden">
+                    <h2>Casino Shop</h2>
+                    <button id="buyMoneyBtn">$1000 for $1 (Fake Purchase)</button>
+                    <button id="buyVIPBtn">VIP Level Up ($10,000)</button>
+                    <p id="shopMessage"></p>
+                </div>
+
+                <!-- Profile -->
+                <div id="profileGame" class="game hidden">
+                    <h2>Profile</h2>
+                    <p>Choose your avatar:</p>
+                    <div id="avatarSelector">
+                        <span class="avatarChoice">🐯</span>
+                        <span class="avatarChoice">🐼</span>
+                        <span class="avatarChoice">🐸</span>
+                        <span class="avatarChoice">🦄</span>
+                        <span class="avatarChoice">👑</span>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </section>
 
         <footer>
             <p>🎲 Gamble responsibly 🎲</p>
         </footer>
     </div>
 
-    <!-- Sound Effects -->
-    <audio id="winSound" src="https://www.soundjay.com/button/sounds/button-4.mp3"></audio>
-    <audio id="jackpotSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
-    <audio id="spinSound" src="https://www.soundjay.com/button/sounds/button-10.mp3"></audio>
-    <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-funnysong.mp3" loop></audio>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

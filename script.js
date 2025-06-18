@@ -1,88 +1,120 @@
-let money = 1000;
-const symbols = ["🍒", "🍋", "🍉", "⭐", "💎", "🔔", "🍀"];
-let username = '';
+let player = {
+    name: '',
+    money: 1000,
+    vip: 1,
+    avatar: '🐯'
+};
 
-const winSound = document.getElementById("winSound");
-const jackpotSound = document.getElementById("jackpotSound");
-const spinSound = document.getElementById("spinSound");
-const bgMusic = document.getElementById("bgMusic");
+document.getElementById("startBtn").addEventListener("click", startGame);
+document.getElementById("resetBtn").addEventListener("click", resetAccount);
+document.getElementById("spinBtn").addEventListener("click", spinSlots);
+document.querySelectorAll(".gameBtn").forEach(btn => {
+    btn.addEventListener("click", e => switchGame(e.target.dataset.game));
+});
+document.getElementById("buyMoneyBtn").addEventListener("click", buyMoney);
+document.getElementById("buyVIPBtn").addEventListener("click", buyVIP);
+document.querySelectorAll(".avatarChoice").forEach(choice => {
+    choice.addEventListener("click", e => selectAvatar(e.target.textContent));
+});
 
-document.getElementById("startBtn").addEventListener("click", saveUser);
-document.getElementById("spinBtn").addEventListener("click", spin);
-
-function saveUser() {
-    username = document.getElementById("username").value.trim();
-    if (username === "") {
-        alert("Please enter your name!");
+function startGame() {
+    const username = document.getElementById("username").value.trim();
+    if (username === '') {
+        alert("Enter your name.");
         return;
     }
-    document.getElementById("welcomeMessage").textContent = `Welcome, ${username}!`;
-    document.getElementById("casino").classList.remove("hidden");
-    bgMusic.volume = 0.2;
-    bgMusic.play();
-    updateMoney();
+    player.name = username;
+    saveData();
+    loadInterface();
 }
 
-function spin() {
-    if (money < 10) {
-        alert("You're out of money! Reload the page to start over.");
+function loadInterface() {
+    document.getElementById("loginScreen").classList.add("hidden");
+    document.getElementById("mainCasino").classList.remove("hidden");
+    updateUI();
+}
+
+function updateUI() {
+    document.getElementById("playerName").textContent = player.name;
+    document.getElementById("moneyDisplay").textContent = player.money;
+    document.getElementById("vipLevel").textContent = player.vip;
+    document.getElementById("avatar").textContent = player.avatar;
+}
+
+function switchGame(game) {
+    document.querySelectorAll(".game").forEach(g => g.classList.add("hidden"));
+    document.getElementById(`${game}Game`).classList.remove("hidden");
+}
+
+function spinSlots() {
+    if (player.money < 10) {
+        alert("Not enough money!");
         return;
     }
+    player.money -= 10;
+    const symbols = ["🍒", "🍋", "🍉", "⭐", "💎", "🔔", "🍀"];
+    const s1 = symbols[Math.floor(Math.random() * symbols.length)];
+    const s2 = symbols[Math.floor(Math.random() * symbols.length)];
+    const s3 = symbols[Math.floor(Math.random() * symbols.length)];
+    document.getElementById("slotsDisplay").textContent = `${s1} ${s2} ${s3}`;
 
-    money -= 10;
-    updateMoney();
+    let result = "No win.";
+    if (s1 === s2 && s2 === s3) {
+        const prize = 500 + (player.vip * 100);
+        player.money += prize;
+        result = `🎉 JACKPOT! Won $${prize}`;
+    } else if (s1 === s2 || s2 === s3 || s1 === s3) {
+        const prize = 50 + (player.vip * 10);
+        player.money += prize;
+        result = `Small win: $${prize}`;
+    }
+    document.getElementById("slotsResult").textContent = result;
+    updateUI();
+    saveData();
+}
 
-    spinSound.play();
+function buyMoney() {
+    player.money += 1000;
+    document.getElementById("shopMessage").textContent = "Fake money purchase successful!";
+    updateUI();
+    saveData();
+}
 
-    let slot1 = randomSymbol();
-    let slot2 = randomSymbol();
-    let slot3 = randomSymbol();
-
-    document.getElementById("slots").textContent = `${slot1} ${slot2} ${slot3}`;
-
-    let resultText = "";
-
-    if (slot1 === slot2 && slot2 === slot3) {
-        let winnings = slot1 === "💎" ? 2000 : 500;
-        money += winnings;
-        resultText = `🎉 JACKPOT! You won $${winnings}! 🎉`;
-        jackpotSound.play();
-        launchConfetti();
-    } else if (slot1 === slot2 || slot2 === slot3 || slot1 === slot3) {
-        money += 100;
-        resultText = "😊 Nice! You won $100.";
-        winSound.play();
+function buyVIP() {
+    if (player.money >= 10000) {
+        player.money -= 10000;
+        player.vip++;
+        document.getElementById("shopMessage").textContent = "VIP Level Up!";
+        updateUI();
+        saveData();
     } else {
-        resultText = "😞 No luck. Try again!";
-    }
-
-    updateMoney();
-    document.getElementById("result").textContent = resultText;
-    addHistory(slot1, slot2, slot3, resultText);
-}
-
-function updateMoney() {
-    document.getElementById("moneyDisplay").textContent = `💰 Money: $${money}`;
-}
-
-function randomSymbol() {
-    return symbols[Math.floor(Math.random() * symbols.length)];
-}
-
-function addHistory(s1, s2, s3, result) {
-    const li = document.createElement("li");
-    li.textContent = `${s1} ${s2} ${s3} - ${result}`;
-    const historyList = document.getElementById("historyList");
-    historyList.prepend(li);
-    if (historyList.children.length > 10) {
-        historyList.removeChild(historyList.lastChild);
+        document.getElementById("shopMessage").textContent = "Not enough money for VIP.";
     }
 }
 
-function launchConfetti() {
-    confetti({
-        particleCount: 200,
-        spread: 70,
-        origin: { y: 0.6 }
-    });
+function selectAvatar(avatar) {
+    player.avatar = avatar;
+    updateUI();
+    saveData();
 }
+
+function saveData() {
+    localStorage.setItem("casinoGOD", JSON.stringify(player));
+}
+
+function loadData() {
+    const data = localStorage.getItem("casinoGOD");
+    if (data) {
+        player = JSON.parse(data);
+        loadInterface();
+    }
+}
+
+function resetAccount() {
+    if (confirm("Are you sure you want to reset your entire account?")) {
+        localStorage.removeItem("casinoGOD");
+        location.reload();
+    }
+}
+
+window.onload = loadData;
