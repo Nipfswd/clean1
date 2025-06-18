@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle at center, #2c3e50, #000000);
+    font-family: 'Luckiest Guy', cursive, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 3px 3px #e67e22;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #e67e22;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+input {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    font-size: 1.2rem;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    background: linear-gradient(to right, #e67e22, #f39c12);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(to right, #f39c12, #e67e22);
+    transform: scale(1.1);
+}
+
+.slots {
+    font-size: 5rem;
+    margin: 20px 0;
+    animation: spinAnimation 1s ease infinite alternate;
+}
+
+@keyframes spinAnimation {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+footer {
+    margin-top: 30px;
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+.hidden {
+    display: none;
+}
+
+#welcomeMessage {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #f1c40f;
+}
+
+#moneyDisplay {
+    font-size: 1.8rem;
+    margin-top: 15px;
+}
