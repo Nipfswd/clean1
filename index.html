@@ -1,91 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>🎰 Ultimate Casino SIM GOD MODE</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ultimate Virtual Casino 🎰 GOD MODE ULTRA++</title>
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div id="app">
 
-        <header>
-            <h1>🎰 Ultimate Casino SIM GOD MODE 🎰</h1>
-            <div id="userInfo">
-                <div id="avatar"></div>
-                <div>
-                    <h2 id="playerName"></h2>
-                    <p>💰 Money: $<span id="moneyDisplay"></span></p>
-                    <p>VIP Level: <span id="vipLevel"></span></p>
-                </div>
-            </div>
-            <button id="resetBtn">Reset Account</button>
-        </header>
+<header>
+  <h1>🎰 Welcome to the Ultimate Virtual Casino 🎰</h1>
+</header>
 
-        <section id="loginScreen" class="card">
-            <h2>Enter Your Name:</h2>
-            <input type="text" id="username" placeholder="Your Name">
-            <button id="startBtn">Start Casino Adventure</button>
-        </section>
+<main>
+  <!-- LOGIN -->
+  <section id="login" class="panel">
+    <h2>Enter Your Name to Start:</h2>
+    <input type="text" id="username" placeholder="Your Name" autocomplete="off" />
+    <button id="startBtn">Start Playing</button>
+  </section>
 
-        <section id="mainCasino" class="hidden">
-
-            <nav>
-                <button class="gameBtn" data-game="slots">Slots 🎰</button>
-                <button class="gameBtn" data-game="blackjack">Blackjack 🃏</button>
-                <button class="gameBtn" data-game="roulette">Roulette 🎯</button>
-                <button class="gameBtn" data-game="shop">Shop 🏪</button>
-                <button class="gameBtn" data-game="profile">Profile 🧑‍🎤</button>
-            </nav>
-
-            <div id="gameContainer">
-
-                <!-- Slots -->
-                <div id="slotsGame" class="game hidden">
-                    <h2>Slot Machine</h2>
-                    <div id="slotsDisplay">🍒 🍋 🍉</div>
-                    <button id="spinBtn">Spin ($10)</button>
-                    <p id="slotsResult"></p>
-                </div>
-
-                <!-- Blackjack (placeholder) -->
-                <div id="blackjackGame" class="game hidden">
-                    <h2>Blackjack 🃏 (Coming Soon)</h2>
-                </div>
-
-                <!-- Roulette (placeholder) -->
-                <div id="rouletteGame" class="game hidden">
-                    <h2>Roulette 🎯 (Coming Soon)</h2>
-                </div>
-
-                <!-- Shop -->
-                <div id="shopGame" class="game hidden">
-                    <h2>Casino Shop</h2>
-                    <button id="buyMoneyBtn">$1000 for $1 (Fake Purchase)</button>
-                    <button id="buyVIPBtn">VIP Level Up ($10,000)</button>
-                    <p id="shopMessage"></p>
-                </div>
-
-                <!-- Profile -->
-                <div id="profileGame" class="game hidden">
-                    <h2>Profile</h2>
-                    <p>Choose your avatar:</p>
-                    <div id="avatarSelector">
-                        <span class="avatarChoice">🐯</span>
-                        <span class="avatarChoice">🐼</span>
-                        <span class="avatarChoice">🐸</span>
-                        <span class="avatarChoice">🦄</span>
-                        <span class="avatarChoice">👑</span>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <footer>
-            <p>🎲 Gamble responsibly 🎲</p>
-        </footer>
+  <!-- CASINO MAIN -->
+  <section id="casino" class="panel hidden">
+    <div class="user-info">
+      <h2>Hello, <span id="playerName"></span>!</h2>
+      <p>💰 Money: $<span id="money">1000.00</span> | VIP Level: <span id="vipLevel">0</span></p>
+      <button id="resetBtn" title="Reset Profile">Reset Profile</button>
     </div>
 
-    <script src="script.js"></script>
+    <nav class="game-nav">
+      <button data-game="slotGame" class="nav-btn active">Slots 🎰</button>
+      <button data-game="blackjackGame" class="nav-btn">Blackjack 🃏</button>
+      <button data-game="rouletteGame" class="nav-btn">Roulette 🎯</button>
+      <button data-game="shopGame" class="nav-btn">Shop 🛒</button>
+      <button data-game="statsGame" class="nav-btn">Stats 📊</button>
+    </nav>
+
+    <!-- SLOT MACHINE -->
+    <section id="slotGame" class="game active">
+      <h3>Slot Machine</h3>
+      <div id="slotMachine">
+        <div class="reel"><div class="reel-inner" id="reel1Inner">🍒</div></div>
+        <div class="reel"><div class="reel-inner" id="reel2Inner">🍋</div></div>
+        <div class="reel"><div class="reel-inner" id="reel3Inner">🍉</div></div>
+      </div>
+      <button id="spinBtn">Spin ($10)</button>
+      <p id="slotResult" class="result-text"></p>
+    </section>
+
+    <!-- BLACKJACK -->
+    <section id="blackjackGame" class="game hidden">
+      <h3>Blackjack</h3>
+      <div class="cards-area">
+        <div>
+          <h4>Your Hand (<span id="playerTotal">0</span>)</h4>
+          <p id="playerCards"></p>
+        </div>
+        <div>
+          <h4>Dealer's Hand (<span id="dealerTotal">??</span>)</h4>
+          <p id="dealerCards"></p>
+        </div>
+      </div>
+      <div class="bj-controls">
+        <button id="dealBtn">Deal ($50)</button>
+        <button id="hitBtn" disabled>Hit</button>
+        <button id="standBtn" disabled>Stand</button>
+      </div>
+      <p id="bjResult" class="result-text"></p>
+    </section>
+
+    <!-- ROULETTE -->
+    <section id="rouletteGame" class="game hidden">
+      <h3>Roulette</h3>
+      <div class="roulette-bets">
+        <button class="rouletteBet" data-bet="red">Bet Red ($100)</button>
+        <button class="rouletteBet" data-bet="black">Bet Black ($100)</button>
+      </div>
+      <p id="rouletteResult" class="result-text"></p>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shopGame" class="game hidden">
+      <h3>Shop</h3>
+      <button id="buyMoney">Buy $1000 for Free (Gift!)</button>
+      <button id="buyVIP">Upgrade VIP ($10,000)</button>
+      <p id="shopMessage" class="result-text"></p>
+    </section>
+
+    <!-- STATS -->
+    <section id="statsGame" class="game hidden">
+      <h3>Your Stats & Leaderboard</h3>
+      <div id="statsContent"></div>
+    </section>
+  </section>
+</main>
+
+<!-- SOUNDS -->
+<audio id="spinSound" src="sounds/spin.mp3"></audio>
+<audio id="winSound" src="sounds/win.mp3"></audio>
+<audio id="bgMusic" src="sounds/casino_bg.mp3" loop></audio>
+
+<script src="script.js"></script>
 </body>
 </html>

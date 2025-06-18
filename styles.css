@@ -1,107 +1,278 @@
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
-
+/* General */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Luckiest Guy', cursive, sans-serif;
-    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-    color: #fff;
-}
-
-#app {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-    text-align: center;
+  background: #0b0b0b;
+  color: #ffd700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0; padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 20px #ffd700;
+  padding: 20px;
+  text-align: center;
+  background: #1a1a1a;
+  width: 100%;
+  box-shadow: 0 0 15px #ffd700aa;
+  user-select: none;
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin: 0;
-    color: #f39c12;
-    text-shadow: 2px 2px #000;
+h1, h2, h3, h4 {
+  margin: 0.5em 0;
 }
 
-#userInfo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
+main {
+  flex-grow: 1;
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-#avatar {
-    font-size: 3rem;
-    margin-right: 20px;
-}
-
-.card {
-    background: rgba(0,0,0,0.6);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
-}
-
-input, button {
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    border: none;
-    margin: 10px;
-    cursor: pointer;
-}
-
-button {
-    background: linear-gradient(to right, #e67e22, #f39c12);
-    color: white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-}
-
-button:hover {
-    transform: scale(1.1);
-}
-
-nav {
-    margin-bottom: 20px;
-}
-
-.gameBtn {
-    margin: 5px;
+/* Panels and layout */
+.panel {
+  background: #121212;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 20px #ffcc0099;
+  margin-bottom: 40px;
 }
 
 .hidden {
-    display: none;
+  display: none !important;
 }
 
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.user-info h2 {
+  margin-bottom: 0.2em;
+}
+
+.user-info p {
+  margin: 0;
+}
+
+.user-info button {
+  background: #444400;
+  border: none;
+  color: #ffd700;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.user-info button:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+/* Navigation */
+.game-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.game-nav button {
+  background: #222200;
+  color: #ffd700;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  user-select: none;
+  transition: background 0.3s ease;
+}
+
+.game-nav button.active,
+.game-nav button:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+/* Games */
 .game {
-    background: rgba(0,0,0,0.5);
-    padding: 20px;
-    border-radius: 20px;
+  text-align: center;
 }
 
-#slotsDisplay {
-    font-size: 5rem;
-    margin: 20px 0;
+.game:not(.active) {
+  display: none;
 }
 
-#avatarSelector {
-    font-size: 2.5rem;
+/* Slot Machine */
+#slotMachine {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 
-.avatarChoice {
-    margin: 0 10px;
-    cursor: pointer;
-    transition: transform 0.2s;
+.reel {
+  width: 80px;
+  height: 80px;
+  background: #111;
+  border: 3px solid #ffcc00;
+  border-radius: 15px;
+  font-size: 3.5rem;
+  line-height: 80px;
+  text-align: center;
+  color: #ffd700;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
 }
 
-.avatarChoice:hover {
-    transform: scale(1.3);
+.reel-inner {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  transition: transform 2s ease-out;
+}
+
+/* Blackjack */
+.cards-area {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  font-size: 2rem;
+  user-select: none;
+}
+
+.cards-area p {
+  background: #222200aa;
+  padding: 10px 15px;
+  border-radius: 10px;
+  min-width: 150px;
+  min-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.bj-controls button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: #222200;
+  color: #ffd700;
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+.bj-controls button:hover:not(:disabled) {
+  background: #ffcc00;
+  color: #000;
+}
+
+.bj-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Roulette */
+.roulette-bets button {
+  padding: 15px 25px;
+  margin: 10px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  user-select: none;
+  transition: background 0.3s ease;
+}
+
+.roulette-bets button[data-bet="red"] {
+  background: #cc0000;
+}
+
+.roulette-bets button[data-bet="red"]:hover {
+  background: #ff4444;
+}
+
+.roulette-bets button[data-bet="black"] {
+  background: #111;
+  color: #ffd700;
+}
+
+.roulette-bets button[data-bet="black"]:hover {
+  background: #444400;
+  color: #ffcc00;
+}
+
+/* Shop */
+#shopGame button {
+  margin: 10px;
+  padding: 12px 30px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: #222200;
+  color: #ffd700;
+  user-select: none;
+  transition: background 0.3s ease;
+}
+
+#shopGame button:hover {
+  background: #ffcc00;
+  color: #000;
+}
+
+/* Result text */
+.result-text {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  min-height: 1.4em;
+  user-select: none;
+  color: #ffd700;
+  text-shadow: 0 0 8px #ffcc00cc;
+}
+
+/* Stats */
+#statsContent {
+  text-align: left;
+  font-size: 1rem;
+  color: #ffee88;
+  user-select: text;
+}
+
+#statsContent p {
+  margin: 6px 0;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .cards-area {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .game-nav {
+    flex-direction: column;
+  }
+  #slotMachine {
+    justify-content: space-around;
+  }
 }
